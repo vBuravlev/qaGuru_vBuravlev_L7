@@ -15,9 +15,7 @@ public class MainPage {
 
     @Step("Ищем репозиторий {repository}")
     public MainPage searchForRepository(String repository) {
-        $(".header-search-input").click();
-        $(".header-search-input").sendKeys(repository);
-        $(".header-search-input").submit();
+        $(".header-search-input").setValue(repository).submit();
         return this;
     }
 

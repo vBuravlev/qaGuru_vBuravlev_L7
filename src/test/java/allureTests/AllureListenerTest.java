@@ -12,32 +12,30 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$x;
 import static io.qameta.allure.Allure.addAttachment;
 
-public class AllureListenerTest extends TestBase{
+public class AllureListenerTest extends TestBase {
 
     @Test
-    void checkIssueNameTest()  {
+    void checkIssueNameTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
 
-       //"Открываем главную страницу"
-            open(baseUrl);
+        //"Открываем главную страницу"
+        open(baseUrl);
 
         //"Ищем репозиторий"
-            $(".header-search-input").click();
-            $(".header-search-input").sendKeys(REPOSITORY);
-            $(".header-search-input").submit();
+        $(".header-search-input").setValue(REPOSITORY).submit();
 
-       //"Переходим в репозиторий"
-            $x("//*[@href='/" + REPOSITORY + "']").click();
+        //"Переходим в репозиторий"
+        $x("//*[@href='/" + REPOSITORY + "']").click();
 
 
         //"Проверяем что открылась страница репозитория "
-            $x("//a[@href='/" + REPOSITORY + "']").shouldBe(visible);
+        $x("//a[@href='/" + REPOSITORY + "']").shouldBe(visible);
 
         //"Переходим в таб Issue"
-            $(By.partialLinkText("Issues")).click();
+        $(By.partialLinkText("Issues")).click();
 
         //"Проверяем что существует Issue под названием "
-            $x("//div[@aria-label='Issues']//a[text()='" + NAME_ISSUE + "']").shouldBe(visible);
-            addAttachment("Page Source", "text/html", WebDriverRunner.source(), "html");
+        $x("//div[@aria-label='Issues']//a[text()='" + NAME_ISSUE + "']").shouldBe(visible);
+        addAttachment("Page Source", "text/html", WebDriverRunner.source(), "html");
     }
 }

@@ -24,9 +24,7 @@ public class AllureLamdaTest extends TestBase {
         });
 
         step("Ищем репозиторий " + REPOSITORY, () -> {
-            $(".header-search-input").click();
-            $(".header-search-input").sendKeys(REPOSITORY);
-            $(".header-search-input").submit();
+            $(".header-search-input").setValue(REPOSITORY).submit();
         });
 
         step("Переходим в репозиторий", () -> {
